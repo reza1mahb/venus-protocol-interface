@@ -1,44 +1,48 @@
 import { Icon, type IconName } from 'components';
+import { CHAIN_METADATA, REMOTE_PROPOSAL_QUEUEING_DELAY_BLOCKS } from 'constants/chainMetadata';
+import { addMilliseconds } from 'date-fns/addMilliseconds';
 import { useTranslation } from 'libs/translations';
+import { governanceChain } from 'libs/wallet';
 import { useMemo } from 'react';
-import { type ProposalCommand, ProposalCommandState } from 'types';
+import { type RemoteProposal, RemoteProposalState } from 'types';
 import { cn } from 'utilities';
+
+const { blockTimeMs: BSC_BLOCK_TIME_MS } = CHAIN_METADATA[governanceChain.id];
+const REMOTE_PROPOSAL_QUEUEING_DELAY_BLOCKS_MS =
+  REMOTE_PROPOSAL_QUEUEING_DELAY_BLOCKS * (BSC_BLOCK_TIME_MS ?? 0);
 
 export type StepInfoProps = React.HTMLAttributes<HTMLDivElement> &
   Pick<
-    ProposalCommand,
+    RemoteProposal,
     | 'chainId'
     | 'state'
-    | 'failedExecutionAt'
-    | 'canceledAt'
-    | 'bridgedAt'
-    | 'queuedAt'
-    | 'succeededAt'
-    | 'executableAt'
-    | 'executedAt'
-    | 'expiredAt'
+    | 'canceledDate'
+    | 'bridgedDate'
+    | 'queuedDate'
+    | 'executionEtaDate'
+    | 'executedDate'
+    | 'expiredDate'
   >;
 
 export const StepInfo: React.FC<StepInfoProps> = ({
   chainId,
   state,
-  failedExecutionAt,
-  canceledAt,
-  bridgedAt,
-  queuedAt,
-  executableAt,
-  executedAt,
-  expiredAt,
+  canceledDate,
+  bridgedDate,
+  queuedDate,
+  executionEtaDate,
+  executedDate,
+  expiredDate,
   ...otherProps
 }) => {
   const { t } = useTranslation();
 
   const getStatusColor = () => {
-    if (state === ProposalCommandState.Executed) {
+    if (state === RemoteProposalState.Executed) {
       return 'text-green';
     }
 
-    if (state === ProposalCommandState.Canceled || state === ProposalCommandState.Expired) {
+    if (state === RemoteProposalState.Canceled || state === RemoteProposalState.Expired) {
       return 'text-red';
     }
 
@@ -46,11 +50,11 @@ export const StepInfo: React.FC<StepInfoProps> = ({
   };
 
   const getIconName = (): IconName => {
-    if (state === ProposalCommandState.Executed) {
+    if (state === RemoteProposalState.Executed) {
       return 'mark';
     }
 
-    if (state === ProposalCommandState.Canceled) {
+    if (state === RemoteProposalState.Canceled) {
       return 'close';
     }
 
@@ -58,70 +62,66 @@ export const StepInfo: React.FC<StepInfoProps> = ({
   };
 
   const getStatusText = () => {
-    if (state === ProposalCommandState.Pending) {
+    if (state === RemoteProposalState.Pending) {
       return t('voteProposalUi.command.status.pending');
     }
 
-    if (state === ProposalCommandState.Bridged) {
+    if (state === RemoteProposalState.Bridged) {
       return t('voteProposalUi.command.status.bridged');
     }
 
-    if (state === ProposalCommandState.Canceled) {
+    if (state === RemoteProposalState.Canceled) {
       return t('voteProposalUi.command.status.canceled');
     }
 
-    if (state === ProposalCommandState.Queued) {
+    if (state === RemoteProposalState.Queued) {
       return t('voteProposalUi.command.status.queued');
     }
 
-    if (state === ProposalCommandState.Succeeded) {
-      return t('voteProposalUi.command.status.succeeded');
-    }
-
-    if (state === ProposalCommandState.Executed) {
+    if (state === RemoteProposalState.Executed) {
       return t('voteProposalUi.command.status.executed');
     }
 
-    if (state === ProposalCommandState.Expired) {
+    if (state === RemoteProposalState.Expired) {
       return t('voteProposalUi.command.status.expired');
     }
   };
 
   const previousStepDate = useMemo(() => {
-    if (state === ProposalCommandState.Bridged) {
-      return bridgedAt;
+    if (state === RemoteProposalState.Bridged) {
+      return bridgedDate;
     }
 
-    if (state === ProposalCommandState.Canceled) {
-      return canceledAt;
+    if (state === RemoteProposalState.Canceled) {
+      return canceledDate;
     }
 
-    if (state === ProposalCommandState.Queued) {
-      return queuedAt;
+    if (state === RemoteProposalState.Queued) {
+      return queuedDate;
     }
 
-    if (state === ProposalCommandState.Executed) {
-      return executedAt;
+    if (state === RemoteProposalState.Executed) {
+      return executedDate;
     }
 
-    if (state === ProposalCommandState.Expired) {
-      return expiredAt;
+    if (state === RemoteProposalState.Expired) {
+      return expiredDate;
     }
-  }, [state, bridgedAt, canceledAt, queuedAt, executedAt, expiredAt]);
+  }, [state, bridgedDate, canceledDate, queuedDate, executedDate, expiredDate]);
 
   const nextStepDate = useMemo(() => {
     let tmpNextStepDate: Date | undefined;
 
-    if (state === ProposalCommandState.Bridged) {
-      tmpNextStepDate = queuedAt;
+    if (state === RemoteProposalState.Bridged && bridgedDate) {
+      tmpNextStepDate = addMilliseconds(bridgedDate, REMOTE_PROPOSAL_QUEUEING_DELAY_BLOCKS_MS);
     }
 
-    if (state === ProposalCommandState.Queued) {
-      tmpNextStepDate = executableAt;
+    if (state === RemoteProposalState.Queued) {
+      tmpNextStepDate = executionEtaDate;
     }
 
     return tmpNextStepDate;
-  }, [state, executableAt, queuedAt]);
+  }, [state, executionEtaDate, bridgedDate]);
 
   return (
     <div {...otherProps}>
@@ -131,7 +131,7 @@ export const StepInfo: React.FC<StepInfoProps> = ({
         <span className="text-sm font-semibold">{getStatusText()}</span>
       </div>
 
-      {state !== ProposalCommandState.Pending && (
+      {state !== RemoteProposalState.Pending && (
         <div className="mt-1 text-xs text-right">
           {previousStepDate && (
             <p className="text-grey">
@@ -139,9 +139,9 @@ export const StepInfo: React.FC<StepInfoProps> = ({
             </p>
           )}
 
-          {(state === ProposalCommandState.Bridged || state === ProposalCommandState.Queued) && (
+          {(state === RemoteProposalState.Bridged || state === RemoteProposalState.Queued) && (
             <p>
-              {state === ProposalCommandState.Bridged
+              {state === RemoteProposalState.Bridged
                 ? t('voteProposalUi.command.dates.queuedIn', {
                     date: nextStepDate,
                   })

@@ -6,7 +6,9 @@ import opbnbLogo from 'libs/wallet/img/chains/opbnb.svg';
 import zkSyncLogo from 'libs/wallet/img/chains/zkSync.svg';
 import { ChainId, type ChainMetadata } from 'types';
 
-const PROPOSAL_EXECUTION_GRACE_PERIOD_MS = 14 * 24 * 60 * 60 * 1000; // 14 days in milliseconds
+export const PROPOSAL_EXECUTION_GRACE_PERIOD_MS = 14 * 24 * 60 * 60 * 1000; // 14 days in milliseconds
+
+export const REMOTE_PROPOSAL_QUEUEING_DELAY_BLOCKS = 20; // BSC blocks
 
 export const CHAIN_METADATA: {
   [chainId in ChainId]: ChainMetadata;
@@ -19,7 +21,6 @@ export const CHAIN_METADATA: {
     blockTimeMs: 3000,
     blocksPerDay: 28800,
     corePoolComptrollerContractAddress: '0xfD36E2c2a6789Db23113685031d7F16329158384',
-    proposalExecutionGracePeriodMs: PROPOSAL_EXECUTION_GRACE_PERIOD_MS,
     nativeToken: getToken({ chainId: ChainId.BSC_MAINNET, symbol: 'BNB' })!,
   },
   [ChainId.BSC_TESTNET]: {
@@ -30,7 +31,6 @@ export const CHAIN_METADATA: {
     blockTimeMs: 3000,
     blocksPerDay: 28800,
     corePoolComptrollerContractAddress: '0x94d1820b2D1c7c7452A163983Dc888CEC546b77D',
-    proposalExecutionGracePeriodMs: PROPOSAL_EXECUTION_GRACE_PERIOD_MS,
     nativeToken: getToken({ chainId: ChainId.BSC_TESTNET, symbol: 'BNB' })!,
   },
   [ChainId.OPBNB_MAINNET]: {

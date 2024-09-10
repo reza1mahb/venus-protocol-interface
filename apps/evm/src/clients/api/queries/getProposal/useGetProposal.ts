@@ -16,11 +16,7 @@ import { useGetCachedProposal } from './useGetCachedProposal';
 
 type TrimmedGetProposalInput = Omit<
   GetProposalInput,
-  | 'currentBlockNumber'
-  | 'proposalMinQuorumVotesMantissa'
-  | 'proposalExecutionGracePeriodMs'
-  | 'blockTimeMs'
-  | 'chainId'
+  'currentBlockNumber' | 'proposalMinQuorumVotesMantissa' | 'blockTimeMs' | 'chainId'
 >;
 
 type Options = QueryObserverOptions<
@@ -30,13 +26,7 @@ type Options = QueryObserverOptions<
   GetProposalOutput,
   [
     FunctionKey.GET_PROPOSAL,
-    Omit<
-      GetProposalInput,
-      | 'currentBlockNumber'
-      | 'proposalMinQuorumVotesMantissa'
-      | 'proposalExecutionGracePeriodMs'
-      | 'blockTimeMs'
-    >,
+    Omit<GetProposalInput, 'currentBlockNumber' | 'proposalMinQuorumVotesMantissa' | 'blockTimeMs'>,
   ]
 >;
 
@@ -50,7 +40,7 @@ export const useGetProposal = (input: TrimmedGetProposalInput, options?: Partial
   });
   const currentBlockNumber = getBlockNumberData?.blockNumber;
 
-  const { blockTimeMs, proposalExecutionGracePeriodMs } = CHAIN_METADATA[governanceChain.id];
+  const { blockTimeMs } = CHAIN_METADATA[governanceChain.id];
 
   // Initialize proposal using cache if available
   const cachedProposal = useGetCachedProposal({ proposalId: +input.proposalId });
@@ -68,7 +58,6 @@ export const useGetProposal = (input: TrimmedGetProposalInput, options?: Partial
         {
           currentBlockNumber,
           proposalMinQuorumVotesMantissa,
-          proposalExecutionGracePeriodMs,
           blockTimeMs,
         },
         params =>

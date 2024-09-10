@@ -1085,7 +1085,6 @@
     "command": {
       "cta": {
         "execute": "Execute",
-        "retry": "Retry",
         "wrongChain": "Switch to {{chainName}}"
       },
       "dates": {
@@ -1096,7 +1095,6 @@
       "description": {
         "bridged": "Waiting for the bridge to propagate the transaction",
         "canceled": "Payload execution cancelled by governance guardian",
-        "executionFailed": "Payload execution failed. Please try again.",
         "pending": "Waiting for the BNB chain payload to be executed",
         "waitingToBeExecutable": "Waiting for queueing period to end",
         "wrongChain": "This payload needs to be executed on the {{chainName}} chain"

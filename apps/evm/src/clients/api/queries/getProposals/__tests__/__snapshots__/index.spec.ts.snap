@@ -4,29 +4,613 @@ exports[`getProposals > returns proposals in the correct format 1`] = `
 {
   "proposals": [
     {
-      "abstainVotes": [
-        {
-          "address": "0x21f62c4c380264231d33dd1a1fe546d013b905f8",
-          "proposalId": "353",
-          "reason": undefined,
-          "support": 2,
-          "votesMantissa": "801851714101606493084",
-        },
-      ],
-      "abstainedVotesMantissa": "801851714101606493084",
+      "abstainVotes": [],
+      "abstainedVotesMantissa": "0",
       "againstVotes": [
         {
-          "address": "0x1abe7f510dd4cc2b017ef78f4757b83ae334862d",
-          "proposalId": "353",
-          "reason": undefined,
+          "address": "0xf5a78c15dd8013b8ed622c3b9b316e8ef5a6f61f",
+          "proposalId": "356",
+          "reason": "All core pools need to have distribution apy, XVS included",
           "support": 0,
-          "votesMantissa": "1e+23",
+          "votesMantissa": "1.557617191655254701525e+21",
         },
       ],
-      "againstVotesMantissa": "1e+23",
+      "againstVotesMantissa": "1.557617191655254701525e+21",
       "cancelDate": undefined,
       "cancelTxHash": undefined,
-      "createdDate": 2023-09-20T07:39:35.000Z,
+      "createdDate": 2024-08-26T18:26:06.000Z,
+      "createdTxHash": "0xf8c200654baf99c40bf6df6e72703c29f7ec17f7bb3a86ed405da39eafe72eed",
+      "description": {
+        "abstainDescription": "Indifferent to execution",
+        "againstDescription": "Do not execute this proposal",
+        "description": "#### Summary
+
+If passed, this VIP will perform the following actions:
+
+- Transfer the ownership of the [Venus Treasury on zkSync](https://era.zksync.network/address/0xB2e9174e23382f7744CebF7e0Be54cA001D95599) to the [Guardian wallet](https://era.zksync.network/address/0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa)
+- Configure the oracles on zkSync for the initial Venus markets on that network
+
+#### Description
+
+Following the community proposal [Deploy Venus Protocol on ZKsync Era](https://community.venus.io/t/deploy-venus-protocol-on-zksync-era/4472), and the [associated snapshot](https://snapshot.org/#/venus-xvs.eth/proposal/0x56aec6471ddf25eddc0a39e00ab1bbb98477fe67576cd84c7993f7d37729a717), this VIP is the first one directly related to the deployment of the Venus protocol to this network.
+
+Apart from the configuration of the Venus Treasury, this VIP configure the Venus Resilient Oracles on zkSync, for the following markets:
+
+- [WETH](https://explorer.zksync.io/address/0x5aea5775959fbc2557cc8789bc1bf90a239d9a91): Chainlink - [0x6D41d1dc818112880b40e26BD6FD347E41008eDA](https://explorer.zksync.io/address/0x6D41d1dc818112880b40e26BD6FD347E41008eDA)
+- [WBTC](https://explorer.zksync.io/address/0xbbeb516fb02a01611cbbe0453fe3c580d7281011): Chainlink - [0x4Cba285c15e3B540C474A114a7b135193e4f1EA6](https://explorer.zksync.io/address/0x4Cba285c15e3B540C474A114a7b135193e4f1EA6)
+- [USDT](https://explorer.zksync.io/address/0x493257fd37edb34451f62edf8d2a0c418852ba4c): Chainlink - [0xB615075979AE1836B476F651f1eB79f0Cd3956a9](https://explorer.zksync.io/address/0xB615075979AE1836B476F651f1eB79f0Cd3956a9)
+- [USDC.e](https://explorer.zksync.io/address/0x3355df6d4c9c3035724fd0e3914de96a5a83aaf4): Chainlink - [0x1824D297C6d6D311A204495277B63e943C2D376E](https://explorer.zksync.io/address/0x1824D297C6d6D311A204495277B63e943C2D376E)
+- [ZK](https://explorer.zksync.io/address/0x5a7d6b2f92c77fad6ccabd7ee0624e64907eaf3e): RedStone (MAIN) - [0x5efDb74da192584746c96EcCe138681Ec1501218](https://explorer.zksync.io/address/0x5efDb74da192584746c96EcCe138681Ec1501218) and Chainlink (FALLBACK and PIVOT) - [0xD1ce60dc8AE060DDD17cA8716C96f193bC88DD13](https://explorer.zksync.io/address/0xD1ce60dc8AE060DDD17cA8716C96f193bC88DD13)
+
+The list of initial markets for ZKsync Era follows the [Chaos labs recommendations](https://community.venus.io/t/deploy-venus-protocol-on-zksync-era/4472/12).
+
+#### Security and additional considerations
+
+We applied the following security procedures for this upgrade:
+
+- **VIP execution simulation:** in a simulation environment, checking ownership of the contracts and validating the returned prices
+- **Deployment on testnet:** the same contracts have been deployed to testnet, and used in the Venus Protocol testnet deployment
+- **Audit:**
+    - Certik, Quantstamp and Peckshield have audited the VTreasuryV8 code
+    - OpenZeppelin, Peckshield, Certik, and Hacken have audited the code of the oracles deployed to zkSync
+
+#### Audit reports
+
+VTreasuryV8:
+
+- [Certik audit report](https://github.com/VenusProtocol/token-bridge/blob/323e95fa3c0167cca2fc1d2807e911e0bae54de9/audits/083_multichain_token_bridge_certik_20231226.pdf) (2023/December/26)
+- [Quantstamp audit report](https://github.com/VenusProtocol/token-bridge/blob/323e95fa3c0167cca2fc1d2807e911e0bae54de9/audits/064_multichain_token_bridge_quantstamp_20231219.pdf) (2023/December/19)
+- [Peckshield audit report](https://github.com/VenusProtocol/token-bridge/blob/04b0a8526bb2fa916785c41eefd94b4f84c12819/audits/079_multichain_token_bridge_peckshield_20231020.pdf) (2023/October/20)
+
+Oracles:
+
+- [OpenZeppeling audit report](https://github.com/VenusProtocol/oracle/blob/6f7a3d8769c28881661953e7ee3299b1d5b31e17/audits/026_oracles_openzeppelin_20230606.pdf) (2023/June/06)
+- [Peckshield audit report](https://github.com/VenusProtocol/oracle/blob/6f7a3d8769c28881661953e7ee3299b1d5b31e17/audits/013_oracles_peckshield_20230424.pdf) (2023/April/24)
+- [Certik audit report](https://github.com/VenusProtocol/oracle/blob/6f7a3d8769c28881661953e7ee3299b1d5b31e17/audits/024_oracles_certik_20230522.pdf) (2023/May/22)
+- [Hacken audit report](https://github.com/VenusProtocol/oracle/blob/6f7a3d8769c28881661953e7ee3299b1d5b31e17/audits/016_oracles_hacken_20230426.pdf) (2023/April/26)
+
+#### Deployed contracts on zkSync
+
+- [ResilientOracle](https://explorer.zksync.io/address/0xDe564a4C887d5ad315a19a96DC81991c98b12182)
+- [ChainlinkOracle](https://explorer.zksync.io/address/0x4FC29E1d3fFFbDfbf822F09d20A5BE97e59F66E5)
+- [RedStoneOracle](https://explorer.zksync.io/address/0xFa1e65e714CDfefDC9729130496AB5b5f3708fdA)
+- [BoundValidator](https://explorer.zksync.io/address/0x51519cdCDDD05E2ADCFA108f4a960755D9d6ea8b)
+
+#### References
+
+- [VIP simulation to configure the Venus Treasury on zkSync](https://github.com/VenusProtocol/vips/pull/360)
+- [Transaction to configure the Venus Treasury on zkSync](https://app.safe.global/transactions/tx?safe=zksync:0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa&id=multisig_0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa_0x3d41da584a31e5178f120af78ef1133a951fcdf7c6a9d65cf96f9ddd262b9c7e)
+- [VIP simulation to configure the oracles on zkSync](https://github.com/VenusProtocol/vips/pull/361)
+- [Transaction to configure the oracles on zkSync](https://app.safe.global/transactions/tx?safe=zksync:0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa&id=multisig_0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa_0x1c8c52bae4a4646312b0b79d4757866312d90e3888c751d2620272ab334b4519)
+- [Deploy Venus Protocol on ZKsync Era](https://community.venus.io/t/deploy-venus-protocol-on-zksync-era/4472)
+- Snapshot [Proposal: Deploy Venus Protocol on ZKsync Era](https://snapshot.org/#/venus-xvs.eth/proposal/0x56aec6471ddf25eddc0a39e00ab1bbb98477fe67576cd84c7993f7d37729a717)
+- [Guardian wallet](https://explorer.zksync.io/address/0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa)
+- [Documentation for Resilient Price Oracle](https://docs-v4.venus.io/risk/resilient-price-oracle)
+
+#### Disclaimer for zkSync VIPs
+
+Privilege commands on zkSync will be executed by the [Guardian wallet](https://explorer.zksync.io/address/0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa), until the [Multichain Governance](https://docs-v4.venus.io/technical-reference/reference-technical-articles/multichain-governance) contracts are fully enabled. If this VIP passes, [this](https://app.safe.global/transactions/tx?safe=zksync:0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa&id=multisig_0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa_0x3d41da584a31e5178f120af78ef1133a951fcdf7c6a9d65cf96f9ddd262b9c7e) and [this](https://app.safe.global/transactions/tx?safe=zksync:0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa&id=multisig_0x751Aa759cfBB6CE71A43b48e40e1cCcFC66Ba4aa_0x1c8c52bae4a4646312b0b79d4757866312d90e3888c751d2620272ab334b4519) multisig transactions will be executed. Otherwise, they will be rejected.",
+        "forDescription": "Execute this proposal",
+        "title": "VIP-356 [zkSync] Venus Treasury and Oracles",
+        "version": "v2",
+      },
+      "endBlock": 41736672,
+      "endDate": 2028-03-02T12:07:38.000Z,
+      "executedDate": undefined,
+      "executedTxHash": undefined,
+      "executionEtaDate": 1970-01-01T00:00:00.000Z,
+      "forVotes": [
+        {
+          "address": "0xc444949e0054a23c44fc45789738bdf64aed2391",
+          "proposalId": "356",
+          "reason": "Community Delegators Approved. LFG Venus! ",
+          "support": 1,
+          "votesMantissa": "4.40051676854007073152171e+23",
+        },
+        {
+          "address": "0xf62c2d6ad02bb8b248e3b9be730b036f04d5453e",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.5189102236520590757127e+22",
+        },
+        {
+          "address": "0x6bc33fa9f61a7c41fe3f370a6dc6e0bf89d56a2f",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.2437923802884837683317e+22",
+        },
+        {
+          "address": "0xf3dbb5ff8dfbe0e75b9491c139b6575a3635a79d",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "5.93541227876392869259e+21",
+        },
+        {
+          "address": "0x233506d641310d0fc34938ef0a8cbe90efca4fec",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.697000030424725054277e+21",
+        },
+        {
+          "address": "0x09c90ea0d16ce058229b939967aa29446d13ceed",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.17e+21",
+        },
+        {
+          "address": "0x21f62c4c380264231d33dd1a1fe546d013b905f8",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "801851714101606493084",
+        },
+        {
+          "address": "0x299741f68fd5b59ca177795d824f9ce9f6843bba",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "63404721729301508664",
+        },
+        {
+          "address": "0x03397520a5c1c27bba59852795764ebf1fe05978",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "13777102348559360929",
+        },
+        {
+          "address": "0x51e76fd862d563d58b7a807b01eabe0f3b07ac1a",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "13058470954295420970",
+        },
+        {
+          "address": "0x627c97d755fc7fbb54ceb3c8e7d341cf9074c357",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "9977051682906883578",
+        },
+        {
+          "address": "0x1c79eb2546e9e5c07a6be6cfb9c341a52eb107db",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "2000000000000000000",
+        },
+        {
+          "address": "0xe853cbc6a77cf04dc5bc990131bab00d926b923a",
+          "proposalId": "356",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1002000000000000000",
+        },
+      ],
+      "forVotesMantissa": "4.77386186263417825006707e+23",
+      "proposalActions": [],
+      "proposalId": 356,
+      "proposalType": 1,
+      "proposerAddress": "0x55a9f5374af30e3045fb491f1da3c2e8a74d168d",
+      "queuedDate": undefined,
+      "queuedTxHash": undefined,
+      "remoteProposals": [],
+      "startDate": 2028-03-01T12:07:38.000Z,
+      "state": 0,
+      "totalVotesMantissa": "4.78943803455073079708232e+23",
+      "userVoteSupport": undefined,
+    },
+    {
+      "abstainVotes": [],
+      "abstainedVotesMantissa": "0",
+      "againstVotes": [],
+      "againstVotesMantissa": "0",
+      "cancelDate": undefined,
+      "cancelTxHash": undefined,
+      "createdDate": 2024-08-23T16:10:08.000Z,
+      "createdTxHash": "0x34047eb31fc7fccf7af13d280f68c938eb84c01c7c0196d26b85e6a62dd719c9",
+      "description": {
+        "abstainDescription": "I am indifferent to whether Venus Protocol proceeds or not",
+        "againstDescription": "I do not think that Venus Protocol should proceed with this proposal",
+        "description": "#### Summary
+
+If passed, following the Community proposal “[Support weETHs collateral on Venus on ETH Mainnet](https://community.venus.io/t/support-weeths-collateral-on-venus-on-eth-mainnet/4493)” and [the associated snapshot](https://snapshot.org/#/venus-xvs.eth/proposal/0xc0bfe98cfcfa95aff48c9503f1c0b866a94454e89a06e19be6faf55149c8bc6b), this VIP adds a market for [weETHs](https://etherscan.io/token/0x917cee801a67f933f2e6b33fc0cd1ed2d5909d88) ([ether.fi](http://ether.fi/)) into the Liquid Staked ETH pool on Ethereum.
+
+#### Risk parameters
+
+Following [Chaos Labs recommendations](https://community.venus.io/t/support-weeths-collateral-on-venus-on-eth-mainnet/4493/4), the risk parameters for the new market are:
+
+Underlying token: [weETHs](https://etherscan.io/token/0x917cee801a67f933f2e6b33fc0cd1ed2d5909d88)
+
+- Borrow cap: 0
+- Supply cap: 180
+- Collateral factor: 80%
+- Liquidation threshold: 85%
+- Reserve factor: 25%
+
+Bootstrap liquidity: 10 weETHs - provided by [ether.fi](http://ether.fi/).
+
+Interest rate curve for the new market:
+
+- kink: 45%
+- base (yearly): 0%
+- multiplier (yearly): 9%
+- jump multiplier (yearly): 75%
+
+#### Oracles configuration
+
+The [ResilientOracle](https://docs-v4.venus.io/risk/resilient-price-oracle) deployed to [Ethereum](https://etherscan.io/address/0xd2ce3fb018805ef92b8C5976cb31F84b4E295F94) is used for weETHs, with the following configuration. The new WeETHAccountantOracle is used to get the USD price of weETHs, first getting the conversion rate weETHs/WETH from the Accountant contract, managed by ether.fi, and then getting the USD price using the [Chainlink price feed for ETH/USD](https://etherscan.io/address/0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419).
+
+- MAIN oracle
+    - Contract: [WeETHAccountantOracle](https://etherscan.io/address/0x132f91AA7afc590D591f168A780bB21B4c29f577)
+    - CORRELATED_TOKEN: [weETHs](https://etherscan.io/token/0x917cee801a67f933f2e6b33fc0cd1ed2d5909d88)
+    - UNDERLYING_TOKEN: [WETH](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)
+    - ACCOUNTANT: [0xbe16605B22a7faCEf247363312121670DFe5afBE](https://etherscan.io/address/0xbe16605B22a7faCEf247363312121670DFe5afBE)
+
+#### Security and additional considerations
+
+We applied the following security procedures for this upgrade:
+
+- **Audits:** [Certik](https://github.com/VenusProtocol/oracle/blob/93a79c97e867f61652fc063abb5df323acc9bed4/audits/116_WeETHAccountantOracle_certik_20240823.pdf) has audited the WeETHAccountantOracle.
+- **VIP execution simulation**: in a simulation environment, validating the new market is properly added to the Liquid Staked ETH pool on Ethereum, with the right parameters and the expected bootstrap liquidity
+- **Deployment on testnet**: the same market has been deployed to sepolia, and used in the Venus Protocol testnet deployment
+
+#### Deployed contracts
+
+- Mainnet vweETHs_LiquidStakedETH: [0xEF26C64bC06A8dE4CA5D31f119835f9A1d9433b9](https://etherscan.io/address/0xEF26C64bC06A8dE4CA5D31f119835f9A1d9433b9)
+- Testnet vweETHs_LiquidStakedETH: [0xB3A201887396F57bad3fF50DFd02022fE1Fd1774](https://sepolia.etherscan.io/address/0xB3A201887396F57bad3fF50DFd02022fE1Fd1774)
+
+#### References
+
+- [VIP simulation](https://github.com/VenusProtocol/vips/pull/357)
+- [Code of WeETHAccountantOracle](https://github.com/VenusProtocol/oracle/blob/develop/contracts/oracles/WeETHAccountantOracle.sol)
+- [Deployment to sepolia](https://sepolia.etherscan.io/tx/0x516b4e1015ac798051b9a04139b45c94137b80c78872566f95bdcff406d46a6a)
+- [Documentation](https://docs-v4.venus.io/risk/resilient-price-oracle#correlated-token-oracles)
+
+#### Disclaimer for Ethereum VIPs
+
+Privilege commands on Ethereum will be executed by the [Guardian wallet](https://etherscan.io/address/0x285960C5B22fD66A736C7136967A3eB15e93CC67), until the [Multichain Governance](https://docs-v4.venus.io/technical-reference/reference-technical-articles/multichain-governance) contracts are fully enabled. If this VIP passes, [this](https://app.safe.global/transactions/tx?safe=eth:0x285960C5B22fD66A736C7136967A3eB15e93CC67&id=multisig_0x285960C5B22fD66A736C7136967A3eB15e93CC67_0xfb324c6722a8b22f2452f0cfdb70d86fc4d2309e626a87b7bafaaa7b2007fec8) multisig transaction will be executed. Otherwise, it will be rejected.",
+        "forDescription": "I agree that Venus Protocol should proceed with this proposal",
+        "title": "VIP-355 [Ethereum] New weETHs market in the Liquid Staked ETH pool",
+        "version": "v2",
+      },
+      "endBlock": 41647867,
+      "endDate": 2028-02-28T10:07:23.000Z,
+      "executedDate": 2024-08-26T16:44:40.000Z,
+      "executedTxHash": "0x36b63977b9adc859049cd3be9d9ba70aeb88c439bbb2cae564ec2038b38bf808",
+      "executionEtaDate": 2024-08-26T16:40:03.000Z,
+      "forVotes": [
+        {
+          "address": "0xc444949e0054a23c44fc45789738bdf64aed2391",
+          "proposalId": "355",
+          "reason": "Community delegators approved. ",
+          "support": 1,
+          "votesMantissa": "4.39607175055904226894924e+23",
+        },
+        {
+          "address": "0xc72f3295b7fe847ec99e3a3c6dd6e90db5e1061b",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.00001059438691098785833e+23",
+        },
+        {
+          "address": "0x1abe7f510dd4cc2b017ef78f4757b83ae334862d",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1e+23",
+        },
+        {
+          "address": "0xfce889ba7afde7428acaa3ef146b1bd526e78a19",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1e+23",
+        },
+        {
+          "address": "0xf62c2d6ad02bb8b248e3b9be730b036f04d5453e",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.5189102236520590757127e+22",
+        },
+        {
+          "address": "0x09c90ea0d16ce058229b939967aa29446d13ceed",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.17e+21",
+        },
+        {
+          "address": "0x21f62c4c380264231d33dd1a1fe546d013b905f8",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "801851714101606493084",
+        },
+        {
+          "address": "0x53beb1e70d3d051d1e8b061ab93a6212c728317d",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "199226357358097054944",
+        },
+        {
+          "address": "0x51e76fd862d563d58b7a807b01eabe0f3b07ac1a",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "13058470954295420970",
+        },
+        {
+          "address": "0x627c97d755fc7fbb54ceb3c8e7d341cf9074c357",
+          "proposalId": "355",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "9977051682906883578",
+        },
+      ],
+      "forVotesMantissa": "7.5699145032521282229046e+23",
+      "proposalActions": [],
+      "proposalId": 355,
+      "proposalType": 0,
+      "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
+      "queuedDate": 2024-08-24T16:40:03.000Z,
+      "queuedTxHash": "0xa5efa9175ae6210ecd2576a7052cbaa734384e93b1401778c6d69b8126fea8d8",
+      "remoteProposals": [],
+      "startDate": 2028-02-27T10:07:23.000Z,
+      "state": 0,
+      "totalVotesMantissa": "7.5699145032521282229046e+23",
+      "userVoteSupport": undefined,
+    },
+    {
+      "abstainVotes": [],
+      "abstainedVotesMantissa": "0",
+      "againstVotes": [
+        {
+          "address": "0x59c3e411ce0f4c0a95d587bbfadbb7b9dfff8c0f",
+          "proposalId": "354",
+          "reason": "0x082157dc212e8931c687edfde6d98ba137bb037afc7652d5796064315fe3ff47",
+          "support": 0,
+          "votesMantissa": "3783405132447",
+        },
+      ],
+      "againstVotesMantissa": "3783405132447",
+      "cancelDate": undefined,
+      "cancelTxHash": undefined,
+      "createdDate": 2024-08-22T14:31:53.000Z,
+      "createdTxHash": "0x5c34ef877cda52ea23f15ce8fcf7c260dec435b1fc7994c77801379c077527a9",
+      "description": {
+        "abstainDescription": "I am indifferent to whether Venus Protocol proceeds or not",
+        "againstDescription": "I do not think that Venus Protocol should proceed with this proposal",
+        "description": "If passed, this VIP will perform the changes recommended by Chaos Labs in this Venus community forum publication: [Chaos Labs - Interest Rate Curve Amendment for Stablecoins on Venus](https://community.venus.io/t/chaos-labs-interest-rate-curve-amendment-for-stablecoins-on-venus/4531).
+
+* BNB chain
+    * Increase multiplier (annualized), from 0.0875 (7% APR at kink) to 0.1 (8% APR at kink): [USDT (Core pool)](https://bscscan.com/address/0xfD5840Cd36d94D7229439859C0112a4185BC0255), [USDC (Core pool)](https://bscscan.com/address/0xecA88125a5ADbe82614ffC12D0DB554E2e2867C8) and [DAI (Core pool)](https://bscscan.com/address/0x334b3eCB4DCa3593BCCC3c7EBD1A1C1d1780FBF1),
+    * Decrease multiplier (annualized), from 0.0875 (7% APR at kink) to 0.075 (6% APR at kink): [FDUSD (Core pool)](https://bscscan.com/address/0xC4eF4229FEc74Ccfe17B2bdeF7715fAC740BA0ba)
+    * Decrease multiplier (annualized), from 0.1 (8% APR at kink) to 0.0375 (3% APR at kink): [USDT (Stablecoins)](https://bscscan.com/address/0x5e3072305F9caE1c7A82F6Fe9E38811c74922c3B)
+    * Decrease multiplier (annualized), from 0.15 (12% APR at kink) to 0.135 (10.8% APR at kink): [USDT (GameFi)](https://bscscan.com/address/0x4978591f17670A846137d9d613e333C38dc68A37), [USDT (DeFi)](https://bscscan.com/address/0x1D8bBDE12B6b34140604E18e9f9c6e14deC16854)
+* Ethereum
+    * Increase multiplier (annualized), from 0.0875 (7% APR at kink) to 0.15 (12% APR at kink): [crvUSD (Core pool)](https://etherscan.io/address/0x672208C10aaAA2F9A6719F449C4C8227bc0BC202)
+    * Decrease multiplier (annualized), from 0.15 (12% APR at kink) to 0.0875 (7% APR at kink): [DAI (Core pool)](https://etherscan.io/address/0xd8AdD9B41D4E1cd64Edad8722AB0bA8D35536657) and [TUSD (Core pool)](https://etherscan.io/address/0x13eB80FDBe5C5f4a7039728E258A6f05fb3B912b)
+* Arbitrum one
+    * Decrease multiplier (annualized), from 0.0875 (7% APR at kink) to 0.08 (6.4% APR at kink): [USDC (Core pool)](https://arbiscan.io/address/0x7D8609f8da70fF9027E9bc5229Af4F6727662707), [USDT (Core pool)](https://arbiscan.io/address/0xB9F9117d4200dC296F9AcD1e8bE1937df834a2fD)
+
+Complete analysis and details of these recommendations are available in the above publication.
+
+VIP simulation: [https://github.com/VenusProtocol/vips/pull/359](https://github.com/VenusProtocol/vips/pull/359)
+
+**Disclaimer for Ethereum and Arbitrum one commands**
+
+Privilege commands on Ethereum and opBNB will be executed by the Guardian wallets ([Ethereum](https://etherscan.io/address/0x285960C5B22fD66A736C7136967A3eB15e93CC67), [Arbitrum one](https://arbiscan.io/address/0x14e0e151b33f9802b3e75b621c1457afc44dcaa0)), until the [Multichain Governance](https://docs-v4.venus.io/technical-reference/reference-technical-articles/multichain-governance) contracts are fully enabled. If this VIP passes, [this](https://app.safe.global/transactions/tx?safe=eth:0x285960C5B22fD66A736C7136967A3eB15e93CC67&id=multisig_0x285960C5B22fD66A736C7136967A3eB15e93CC67_0x5672182a533c441cbc4537c21728e354dbd8764ef36f8d171f8704502040b070) and [this](https://app.safe.global/transactions/tx?safe=arb1:0x14e0E151b33f9802b3e75b621c1457afc44DcAA0&id=multisig_0x14e0E151b33f9802b3e75b621c1457afc44DcAA0_0x1ddcc5cd0f5f797cee550ed845be65545b9af4e701642a1eed1c0998f08dc0b7) multisig transactions will be executed. Otherwise, they will be rejected.
+",
+        "forDescription": "I agree that Venus Protocol should proceed with this proposal",
+        "title": "VIP-354 Risk Parameters Adjustments (Stablecoins)",
+        "version": "v2",
+      },
+      "endBlock": 41617203,
+      "endDate": 2028-02-27T08:34:11.000Z,
+      "executedDate": 2024-08-23T20:44:37.000Z,
+      "executedTxHash": "0xebf09fd3f1f53bb7ac22d1773d318df963371341eb73a122aea5e5d6cbab7a16",
+      "executionEtaDate": 2024-08-23T20:38:01.000Z,
+      "forVotes": [
+        {
+          "address": "0xc444949e0054a23c44fc45789738bdf64aed2391",
+          "proposalId": "354",
+          "reason": "Community delegators approved. ",
+          "support": 1,
+          "votesMantissa": "4.37850902114057534430359e+23",
+        },
+        {
+          "address": "0xc72f3295b7fe847ec99e3a3c6dd6e90db5e1061b",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.00001059438691098785833e+23",
+        },
+        {
+          "address": "0x1abe7f510dd4cc2b017ef78f4757b83ae334862d",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1e+23",
+        },
+        {
+          "address": "0xfce889ba7afde7428acaa3ef146b1bd526e78a19",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1e+23",
+        },
+        {
+          "address": "0xf62c2d6ad02bb8b248e3b9be730b036f04d5453e",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.5189102236520590757127e+22",
+        },
+        {
+          "address": "0xf3dbb5ff8dfbe0e75b9491c139b6575a3635a79d",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "5.93541227876392869259e+21",
+        },
+        {
+          "address": "0x09c90ea0d16ce058229b939967aa29446d13ceed",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.17e+21",
+        },
+        {
+          "address": "0x3189b40140cac6c20d5de8a37d667cc6a866d41b",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.138020574640866898738e+21",
+        },
+        {
+          "address": "0xbdc1faea0cb9121df6afd0e47accd3048ba01337",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1.023789395302644368193e+21",
+        },
+        {
+          "address": "0x21f62c4c380264231d33dd1a1fe546d013b905f8",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "801851714101606493084",
+        },
+        {
+          "address": "0x53beb1e70d3d051d1e8b061ab93a6212c728317d",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "199226357358097054944",
+        },
+        {
+          "address": "0x299741f68fd5b59ca177795d824f9ce9f6843bba",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "63404721729301508664",
+        },
+        {
+          "address": "0x03397520a5c1c27bba59852795764ebf1fe05978",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "13777102348559360929",
+        },
+        {
+          "address": "0x51e76fd862d563d58b7a807b01eabe0f3b07ac1a",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "13058470954295420970",
+        },
+        {
+          "address": "0x627c97d755fc7fbb54ceb3c8e7d341cf9074c357",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "9977051682906883578",
+        },
+        {
+          "address": "0x1c79eb2546e9e5c07a6be6cfb9c341a52eb107db",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "2000000000000000000",
+        },
+        {
+          "address": "0xe853cbc6a77cf04dc5bc990131bab00d926b923a",
+          "proposalId": "354",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1002000000000000000",
+        },
+      ],
+      "forVotesMantissa": "7.63412583456151430655009e+23",
+      "proposalActions": [
+        {
+          "actionIndex": 0,
+          "callData": "0x00000000000000000000000062a8919c4c413fd4f9aef7348540bc4b1b5cc805",
+          "signature": "_setInterestRateModel(address)",
+          "target": "0xfd5840cd36d94d7229439859c0112a4185bc0255",
+          "value": "0",
+        },
+        {
+          "actionIndex": 1,
+          "callData": "0x00000000000000000000000062a8919c4c413fd4f9aef7348540bc4b1b5cc805",
+          "signature": "_setInterestRateModel(address)",
+          "target": "0xeca88125a5adbe82614ffc12d0db554e2e2867c8",
+          "value": "0",
+        },
+        {
+          "actionIndex": 2,
+          "callData": "0x00000000000000000000000062a8919c4c413fd4f9aef7348540bc4b1b5cc805",
+          "signature": "_setInterestRateModel(address)",
+          "target": "0x334b3ecb4dca3593bccc3c7ebd1a1c1d1780fbf1",
+          "value": "0",
+        },
+        {
+          "actionIndex": 3,
+          "callData": "0x000000000000000000000000def4b9462223c9a44e61d217a145063c7836fd7b",
+          "signature": "_setInterestRateModel(address)",
+          "target": "0xc4ef4229fec74ccfe17b2bdef7715fac740ba0ba",
+          "value": "0",
+        },
+        {
+          "actionIndex": 4,
+          "callData": "0x000000000000000000000000b36b273601ac5e0cabd0845b7b8caa3426611ca0",
+          "signature": "setInterestRateModel(address)",
+          "target": "0x5e3072305f9cae1c7a82f6fe9e38811c74922c3b",
+          "value": "0",
+        },
+        {
+          "actionIndex": 5,
+          "callData": "0x0000000000000000000000003ab2e4594d9c81455b330b423dec61e49eb11667",
+          "signature": "setInterestRateModel(address)",
+          "target": "0x4978591f17670a846137d9d613e333c38dc68a37",
+          "value": "0",
+        },
+        {
+          "actionIndex": 6,
+          "callData": "0x0000000000000000000000003ab2e4594d9c81455b330b423dec61e49eb11667",
+          "signature": "setInterestRateModel(address)",
+          "target": "0x1d8bbde12b6b34140604e18e9f9c6e14dec16854",
+          "value": "0",
+        },
+      ],
+      "proposalId": 354,
+      "proposalType": 1,
+      "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
+      "queuedDate": 2024-08-23T14:38:01.000Z,
+      "queuedTxHash": "0xaaa1888607deaf2bc6d9ff619cbfc6c7afc4a111431594c4e58bd8daa332596d",
+      "remoteProposals": [],
+      "startDate": 2028-02-26T08:34:11.000Z,
+      "state": 0,
+      "totalVotesMantissa": "7.63412583459934835787456e+23",
+      "userVoteSupport": undefined,
+    },
+    {
+      "abstainVotes": [],
+      "abstainedVotesMantissa": "0",
+      "againstVotes": [],
+      "againstVotesMantissa": "0",
+      "cancelDate": undefined,
+      "cancelTxHash": undefined,
+      "createdDate": 2024-08-15T20:24:05.000Z,
       "createdTxHash": "0xbe4f9879425120453393641d4518e571b289d3ec74e3a27a2d4281caf251f408",
       "description": {
         "abstainDescription": "I am indifferent to whether Venus Protocol proceeds or not",
@@ -54,11 +638,11 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
         "title": "VIP-353 [Ethereum] Risk Parameters Adjustments (WETH)",
         "version": "v2",
       },
-      "endBlock": 33499859,
-      "endDate": 2027-05-21T12:06:59.000Z,
-      "executedDate": undefined,
+      "endBlock": 41423119,
+      "endDate": 2028-02-20T14:49:59.000Z,
+      "executedDate": 2024-08-17T02:56:30.000Z,
       "executedTxHash": "0x91f6267525b678fe62632dc738c766ccb02408a81cd9f5915f4f40db79368ce2",
-      "executionEtaDate": 1970-01-01T00:00:00.000Z,
+      "executionEtaDate": 2024-08-17T02:52:25.000Z,
       "forVotes": [
         {
           "address": "0xc444949e0054a23c44fc45789738bdf64aed2391",
@@ -75,6 +659,13 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
           "votesMantissa": "1.00001059438691098785833e+23",
         },
         {
+          "address": "0x1abe7f510dd4cc2b017ef78f4757b83ae334862d",
+          "proposalId": "353",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "1e+23",
+        },
+        {
           "address": "0xfce889ba7afde7428acaa3ef146b1bd526e78a19",
           "proposalId": "353",
           "reason": undefined,
@@ -89,6 +680,13 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
           "votesMantissa": "1.16937e+21",
         },
         {
+          "address": "0x21f62c4c380264231d33dd1a1fe546d013b905f8",
+          "proposalId": "353",
+          "reason": undefined,
+          "support": 1,
+          "votesMantissa": "801851714101606493084",
+        },
+        {
           "address": "0x53beb1e70d3d051d1e8b061ab93a6212c728317d",
           "proposalId": "353",
           "reason": undefined,
@@ -96,7 +694,7 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
           "votesMantissa": "199226357358097054944",
         },
         {
-          "address": "0x3d759121234cd36F8124C21aFe1c6852d2bEd848",
+          "address": "0x03397520a5c1c27bba59852795764ebf1fe05978",
           "proposalId": "353",
           "reason": undefined,
           "support": 1,
@@ -117,17 +715,18 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
           "votesMantissa": "9977051682906883578",
         },
       ],
-      "forVotesMantissa": "6.34876045445857488254946e+23",
+      "forVotesMantissa": "7.3567789715995909474803e+23",
       "proposalActions": [],
-      "proposalId": "353",
+      "proposalId": 353,
       "proposalType": 1,
       "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
-      "queuedDate": undefined,
+      "queuedDate": 2024-08-16T20:52:25.000Z,
       "queuedTxHash": "0xc295f4f351eb2ebeebbbee99066733585458ef91fc38570594c8da1e0554cfd6",
-      "startDate": 2027-05-21T11:59:29.000Z,
+      "remoteProposals": [],
+      "startDate": 2028-02-19T14:49:59.000Z,
       "state": 0,
       "totalVotesMantissa": "7.3567789715995909474803e+23",
-      "userVoteSupport": 1,
+      "userVoteSupport": undefined,
     },
     {
       "abstainVotes": [],
@@ -273,11 +872,12 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
       ],
       "forVotesMantissa": "7.52101475214427933013256e+23",
       "proposalActions": [],
-      "proposalId": "352",
+      "proposalId": 352,
       "proposalType": 0,
       "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
       "queuedDate": 2024-08-15T20:22:08.000Z,
       "queuedTxHash": "0xe8069c2913513de089e9dcd56e3ce3efd50fdbda430f9b351c0272bfe3e6bd5c",
+      "remoteProposals": [],
       "startDate": 2028-02-18T14:43:14.000Z,
       "state": 0,
       "totalVotesMantissa": "7.52101475214427933013256e+23",
@@ -410,11 +1010,12 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
       ],
       "forVotesMantissa": "7.51846555629564000714505e+23",
       "proposalActions": [],
-      "proposalId": "351",
+      "proposalId": 351,
       "proposalType": 0,
       "proposerAddress": "0x55a9f5374af30e3045fb491f1da3c2e8a74d168d",
       "queuedDate": 2024-08-14T15:53:08.000Z,
       "queuedTxHash": "0x8260bf3ec31bf5c54f5e5d7393eeffb3aab7e510042dd1e591cc70451c65130f",
+      "remoteProposals": [],
       "startDate": 2028-02-17T10:15:29.000Z,
       "state": 0,
       "totalVotesMantissa": "7.51846555629564000714505e+23",
@@ -597,11 +1198,12 @@ The distribution of funds to the RiskFundConverter has been zero since [VIP-332]
           "value": "0",
         },
       ],
-      "proposalId": "350",
+      "proposalId": 350,
       "proposalType": 0,
       "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
       "queuedDate": 2024-08-14T13:42:52.000Z,
       "queuedTxHash": "0xec69d21f1d87d1d64c7c35f48801af90eaabd39ebc19c7ada420c5a828943e1c",
+      "remoteProposals": [],
       "startDate": 2028-02-17T08:10:08.000Z,
       "state": 0,
       "totalVotesMantissa": "7.52914287346152900465829e+23",
@@ -798,11 +1400,12 @@ The Venus Stars Team suggests revising and enhancing the budget for the Venus Am
           "value": "0",
         },
       ],
-      "proposalId": "349",
+      "proposalId": 349,
       "proposalType": 0,
       "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
       "queuedDate": 2024-08-09T20:53:57.000Z,
       "queuedTxHash": "0xd50050e75d00114d41e05f3ad31a13dfed5ed57c2221ad1b47bee8c0ae473ab3",
+      "remoteProposals": [],
       "startDate": 2028-02-12T15:33:20.000Z,
       "state": 0,
       "totalVotesMantissa": "7.52149778071656668165969e+23",
@@ -966,11 +1569,12 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
       ],
       "forVotesMantissa": "7.34344226370510988269891e+23",
       "proposalActions": [],
-      "proposalId": "348",
+      "proposalId": 348,
       "proposalType": 1,
       "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
       "queuedDate": 2024-08-01T11:45:26.000Z,
       "queuedTxHash": "0x22c6b3a217539a274ce68e982c89d72f7c4388c0e39cea0149c21f9f1cb7bd4e",
+      "remoteProposals": [],
       "startDate": 2028-02-04T06:59:17.000Z,
       "state": 0,
       "totalVotesMantissa": "7.34344226370510988269891e+23",
@@ -1105,651 +1709,19 @@ Privilege commands on Ethereum will be executed by the [Guardian wallet](https:/
       ],
       "forVotesMantissa": "7.32870666544909391354795e+23",
       "proposalActions": [],
-      "proposalId": "347",
+      "proposalId": 347,
       "proposalType": 1,
       "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
       "queuedDate": 2024-07-30T15:42:12.000Z,
       "queuedTxHash": "0x4b739acb7f4d968000c7f583b00d6e665563b70e44ccbf6dd38cadc2d10fd54c",
+      "remoteProposals": [],
       "startDate": 2028-02-02T11:05:17.000Z,
       "state": 0,
       "totalVotesMantissa": "7.32870666544909391354795e+23",
       "userVoteSupport": undefined,
     },
-    {
-      "abstainVotes": [],
-      "abstainedVotesMantissa": "0",
-      "againstVotes": [],
-      "againstVotesMantissa": "0",
-      "cancelDate": undefined,
-      "cancelTxHash": undefined,
-      "createdDate": 2024-07-26T17:52:42.000Z,
-      "createdTxHash": "0xa776b580205bd77d410bcba8ffac771f7393f22af5a5d2dd059f5d7e98b966be",
-      "description": {
-        "abstainDescription": "I am indifferent to whether Venus Protocol proceeds or not",
-        "againstDescription": "I do not think that Venus Protocol should proceed with this proposal",
-        "description": "#### Summary
-
-If passed this VIP will perform the following actions:
-
-- Transfer 35,000 USDT to Certik for the retainer program (July and August 2024)
-- Transfer 7,500 USDT to Fairyproof for the audit of Two Kinks Interest Rates
-- Transfer 21,600 USDC to Chainalysis for the yearly subscription fee renewal
-- Transfer 170,000 USDC to ChaosLabs for the Quarterly fee
-- Transfer 3,000 USDT to ChainPatrol
-- Transfer assets back to the community wallet for various deployments GAS refund
-- Transfer 68,000 XVS and 833.33 BNB to Skynet for the liquidity management of XVS
-
-#### Details
-
-**Certik - retainer program**
-
-- Auditor: Certik ([https://certik.com](https://certik.com/))
-- Concept: Retainer program - monthly payment of July and August 2024. Scheduled audits by Certik in July and August: Two Kinks Interest Rates
-- Cost: 35,000 USDT, to be sent to the BEP20 address 0x4cf605b238e9c3c72d0faed64d12426e4a54ee12
-
-**Fairyproof - Two Kinks Interest Rates**
-
-- Auditor: Fairyproof ([https://www.fairyproof.com](https://www.fairyproof.com/))
-- Payload: Two Kinks Interest Rates ([here](https://github.com/VenusProtocol/venus-protocol/pull/494) and [here](https://github.com/VenusProtocol/isolated-pools/pull/417))
-- Status: audit started on July 26th, 2024. It should take 3 days
-- Cost: 7,500 USDT, to be sent to the BEP20 address 0x060a08fff78aedba4eef712533a324272bf68119
-
-**Chainalysis**
-
-- [http://chainalysis.com](http://chainalysis.com/)
-- Entity Risking - Silver plan - All Assets 100,000 Screens / Annual
-- Support Level - Gold - Commercial
-- Payment to be sent to the community wallet to issue payment
-- Cost: 21,600 USDC, to be sent to the BEP20 address: 0xc444949e0054A23c44Fc45789738bdF64aed2391
-
-**Chaos Labs**
-
-- [https://chaoslabs.xyz](https://chaoslabs.xyz/)
-- Quarterly payment of Q3-2024 USDC 100,000.00
-- Q3-2024 Additional deployment (Ethereum) USDC 30,000
-- Q2-Q3 Additional Deployment (Arbitrum) Prorated 4 months USDC 40,000
-- Cost: 170,000 USDC, to be sent to the BEP20 address 0xfb1912af5b9d3fb678f801bf764e98f1c217ef35
-
-**ChainPatrol**
-
-- [https://chainpatrol.io](https://chainpatrol.io/)
-- [Proposal:](https://community.venus.io/t/proposal-to-venus-protocol-enhancing-security-and-trust-with-chainpatrol/4474) Enhancing Security and Trust with ChainPatrol.
-- Pay $3,000 USD ($250 USD/mo) for 1 Year Contract
-- [Snapshot vote](https://snapshot.org/#/venus-xvs.eth/proposal/0x66e9a98483a28125452b502feddcfcdc38a626ed25754bebb79c1a7fbd97f058)
-- Cost: 3,000 USDT, to be sent to the BEP20 address 0x3D9d22E1821Be3b1Ce2A8ACB6FE47fFEF04243c3
-
-**Community Refunds**
-
-- [2 BNB](https://bscscan.com/tx/0xf74d485ecba35d2081070d6661854633713e18354d333069141077cdb7389e25) provided for VIP-330 Timelock GAS
-- [30 USDT](https://etherscan.io/tx/0xc5f5029d26caa1ad9c1bbb361825ae352218f39d804c0831caaa698d10b4f888) converted to ETH to Release Funds on ETH Converters
-- [270 USDT](https://etherscan.io/tx/0x6935ee847c3d87d6d0a35e9896c6342704ecd5ed8264412e41858e2582013fb9) converted to ETH to Release Funds on ETH Converters
-- [636.61 USDT](https://etherscan.io/tx/0x8eac6be59707fe1553474ff649594cc3b68e1a735b3dd8598740f93e9b7260fe) Swapped to ETH for VIP-335 ETH Comptroller Upgrade GAS
-- [313 USDC](https://bscscan.com/tx/0x67e836eacf4dc429deff03d69cc5ac05e4b815180b92b5b19595ae98b9e6745f) converted to ETH for VIP-335 Execution
-- Total: 2 BNB / 936.61 USDT / 313 USDC, to be sent to the BEP20 address 0xc444949e0054A23c44Fc45789738bdF64aed2391
-
-**Skynet Trading**
-
-- [https://skynettrading.com](https://skynettrading.com/)
-- Liquidity Management budget Increase (XVS/BNB) pair.
-- Cost: 68,000 XVS ($500K, assuming 1 XVS = $7.35) and 833.33 BNB ($500K, assuming 1 BNB= $600)
-- [Proposal](https://community.venus.io/t/proposal-liquidity-management-budget-increase-xvs-bnb/4482)
-- [Snapshot Vote](https://snapshot.org/#/venus-xvs.eth/proposal/0x5e83f140833485f59fb7190b77088dfe5d76879500c233f7afe202315097aa41)
-- Funds to be transferred to the DeFiTech/SkyNet Multisig
-- BEP20: 0x4124E7aAAfd7F29ad6E6914B80179060B8bE871c
-
-#### References
-
-- [VIP simulation](https://github.com/VenusProtocol/vips/pull/333)",
-        "forDescription": "I agree that Venus Protocol should proceed with this proposal",
-        "title": "VIP-346 Payments issuance for audits and other expenses",
-        "version": "v2",
-      },
-      "endBlock": 40845488,
-      "endDate": 2028-01-31T13:28:26.000Z,
-      "executedDate": 2024-07-29T18:01:16.000Z,
-      "executedTxHash": "0x211c3036c345350c47f9d3f4de1751838d75f2a8f1435131b73c914b09c362d8",
-      "executionEtaDate": 2024-07-29T17:59:24.000Z,
-      "forVotes": [
-        {
-          "address": "0xc444949e0054a23c44fc45789738bdf64aed2391",
-          "proposalId": "346",
-          "reason": "Community delegators Approved. ",
-          "support": 1,
-          "votesMantissa": "4.07289674445287940237609e+23",
-        },
-        {
-          "address": "0xc72f3295b7fe847ec99e3a3c6dd6e90db5e1061b",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.00001059438691098785833e+23",
-        },
-        {
-          "address": "0x1abe7f510dd4cc2b017ef78f4757b83ae334862d",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1e+23",
-        },
-        {
-          "address": "0xfce889ba7afde7428acaa3ef146b1bd526e78a19",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1e+23",
-        },
-        {
-          "address": "0xf62c2d6ad02bb8b248e3b9be730b036f04d5453e",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.5189102236520590757127e+22",
-        },
-        {
-          "address": "0x09c90ea0d16ce058229b939967aa29446d13ceed",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.166e+21",
-        },
-        {
-          "address": "0x21f62c4c380264231d33dd1a1fe546d013b905f8",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "801851714101606493084",
-        },
-        {
-          "address": "0x299741f68fd5b59ca177795d824f9ce9f6843bba",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "63404721729301508664",
-        },
-        {
-          "address": "0x1c25523a33128dc87ff6f26c444a981b03a97f1e",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "7986304696458341870",
-        },
-        {
-          "address": "0x03397520a5c1c27bba59852795764ebf1fe05978",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "4297102348559360929",
-        },
-        {
-          "address": "0x51e76fd862d563d58b7a807b01eabe0f3b07ac1a",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "3338470954295420970",
-        },
-        {
-          "address": "0x627c97d755fc7fbb54ceb3c8e7d341cf9074c357",
-          "proposalId": "346",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "142051682906883578",
-        },
-      ],
-      "forVotesMantissa": "7.24526856486012757789664e+23",
-      "proposalActions": [
-        {
-          "actionIndex": 0,
-          "callData": "0x00000000000000000000000055d398326f99059ff775485246999027b31979550000000000000000000000000000000000000000000007695a92c20d6fe000000000000000000000000000004cf605b238e9c3c72d0faed64d12426e4a54ee12",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-        {
-          "actionIndex": 1,
-          "callData": "0x00000000000000000000000055d398326f99059ff775485246999027b31979550000000000000000000000000000000000000000000001969368974c05b00000000000000000000000000000060a08fff78aedba4eef712533a324272bf68119",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-        {
-          "actionIndex": 2,
-          "callData": "0x0000000000000000000000008ac76a51cc950d9822d68b83fe1ad97b32cd580d000000000000000000000000000000000000000000000492f037764b95800000000000000000000000000000c444949e0054a23c44fc45789738bdf64aed2391",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-        {
-          "actionIndex": 3,
-          "callData": "0x000000000000000000000000eca88125a5adbe82614ffc12d0db554e2e2867c80000000000000000000000000000000000000000000000000000e6e81179dc00000000000000000000000000c53ffda840b51068c64b2e052a5715043f634bcd",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-        {
-          "actionIndex": 4,
-          "callData": "0x000000000000000000000000eca88125a5adbe82614ffc12d0db554e2e2867c8000000000000000000000000f322942f644a996a617bd29c16bd7d231d9f35e9000000000000000000000000000000000000000000000d028f86ff8671380000000000000000000000000000f322942f644a996a617bd29c16bd7d231d9f35e9",
-          "signature": "redeemUnderlyingAndTransfer(address,address,uint256,address)",
-          "target": "0xc53ffda840b51068c64b2e052a5715043f634bcd",
-          "value": "0",
-        },
-        {
-          "actionIndex": 5,
-          "callData": "0x0000000000000000000000008ac76a51cc950d9822d68b83fe1ad97b32cd580d0000000000000000000000000000000000000000000023ffb7ed6565d6400000000000000000000000000000fb1912af5b9d3fb678f801bf764e98f1c217ef35",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-        {
-          "actionIndex": 6,
-          "callData": "0x000000000000000000000000bb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c00000000000000000000000000000000000000000000002d4888513b630d0000000000000000000000000000939bd8d64c0a9583a7dcea9933f7b21697ab6396",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-        {
-          "actionIndex": 7,
-          "callData": "0x00000000000000000000000000000000000000000000002d4888513b630d0000",
-          "signature": "withdraw(uint256)",
-          "target": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
-          "value": "0",
-        },
-        {
-          "actionIndex": 9,
-          "callData": "0x00000000000000000000000055d398326f99059ff775485246999027b3197955000000000000000000000000000000000000000000000032c61328a0a69d0000000000000000000000000000c444949e0054a23c44fc45789738bdf64aed2391",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-        {
-          "actionIndex": 10,
-          "callData": "0x0000000000000000000000008ac76a51cc950d9822d68b83fe1ad97b32cd580d000000000000000000000000000000000000000000000010f7bf61a7a9440000000000000000000000000000c444949e0054a23c44fc45789738bdf64aed2391",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-        {
-          "actionIndex": 11,
-          "callData": "0x0000000000000000000000004124e7aaafd7f29ad6e6914b80179060b8be871c000000000000000000000000000000000000000000000e664992288f22800000",
-          "signature": "_grantXVS(address,uint256)",
-          "target": "0xfd36e2c2a6789db23113685031d7f16329158384",
-          "value": "0",
-        },
-        {
-          "actionIndex": 13,
-          "callData": "0x00000000000000000000000055d398326f99059ff775485246999027b31979550000000000000000000000000000000000000000000000a2a15d09519be000000000000000000000000000003d9d22e1821be3b1ce2a8acb6fe47ffef04243c3",
-          "signature": "withdrawTreasuryBEP20(address,uint256,address)",
-          "target": "0xf322942f644a996a617bd29c16bd7d231d9f35e9",
-          "value": "0",
-        },
-      ],
-      "proposalId": "346",
-      "proposalType": 0,
-      "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
-      "queuedDate": 2024-07-27T17:59:24.000Z,
-      "queuedTxHash": "0xe10d420fda0ea567200153382452ae6fe75442c1700a47c4fa038459b49992e4",
-      "startDate": 2028-01-30T13:28:26.000Z,
-      "state": 0,
-      "totalVotesMantissa": "7.24526856486012757789664e+23",
-      "userVoteSupport": undefined,
-    },
-    {
-      "abstainVotes": [],
-      "abstainedVotesMantissa": "0",
-      "againstVotes": [],
-      "againstVotesMantissa": "0",
-      "cancelDate": undefined,
-      "cancelTxHash": undefined,
-      "createdDate": 2024-07-26T16:50:27.000Z,
-      "createdTxHash": "0xfa61989b6b1ffeac2db196886a90ff19ad4b1ca5ded07dea0fff8274b0e16d77",
-      "description": {
-        "abstainDescription": "I am indifferent to whether Venus Protocol proceeds or not",
-        "againstDescription": "I do not think that Venus Protocol should proceed with this proposal",
-        "description": "### Summary
-
-If passed, following the Community proposal “[Support ezETH as collateral on ETH Mainnet and BNB Chain](https://community.venus.io/t/support-ezeth-as-collateral-on-eth-mainnet-and-bnb-chain/4415)” and [the associated snapshot](https://snapshot.org/#/venus-xvs.eth/proposal/0xc2db89a9e361c9da0f9a545411b66b0decb68ed2916fb8171f12c7213a53d088), this VIP adds a market for the [ezETH token](https://etherscan.io/token/0xbf5495Efe5DB9ce00f80364C8B423567e58d2110) ([Renzo Protocol](https://www.renzoprotocol.com/)) into the Liquid Staked ETH pool on Ethereum.
-
-### Description
-
-#### Risk parameters
-
-Following [Chaos Labs recommendations](https://community.venus.io/t/support-ezeth-as-collateral-on-eth-mainnet-and-bnb-chain/4415/4), the risk parameters for the new market are:
-
-Underlying token: [ezETH](https://etherscan.io/token/0xbf5495Efe5DB9ce00f80364C8B423567e58d2110)
-
-* Borrow cap: 1,400
-* Supply cap: 14,000
-* Collateral factor: 80%
-* Liquidation threshold: 85%
-* Reserve factor: 20%
-
-Bootstrap liquidity: 1.41 ezETH - provided by the [Renzo Protocol](https://etherscan.io/address/0x1e3233e8d972cffc7d0f83afae4354a0db74e34e).
-
-Interest rate curve for the new market:
-
-* kink: 45%
-* base (yearly): 0%
-* multiplier (yearly): 9%
-* jump multiplier (yearly): 75%
-
-#### Oracles configuration
-
-The [ResilientOracle](https://docs-v4.venus.io/risk/resilient-price-oracle) deployed to [Ethereum](https://etherscan.io/address/0xd2ce3fb018805ef92b8C5976cb31F84b4E295F94) is used for ezETH, with the following configuration. The OneJumpOracle is used to get the USD price of ezETH, first getting the conversion rate ezETH/WETH using the feeds from RedStone or Chainlink, and then getting the USD price using the [Chainlink price feed for ETH/USD](https://etherscan.io/address/0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419).
-
-* MAIN oracle
-    * Contract: [OneJumpOracle](https://etherscan.io/address/0xf689AD140BDb9425fB83ba6f55866447244b5a23)
-    * CORRELATED_TOKEN: [ezETH](https://etherscan.io/token/0xbf5495Efe5DB9ce00f80364C8B423567e58d2110)
-    * UNDERLYING_TOKEN: [WETH](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)
-    * INTERMEDIATE_ORACLE: [RedStoneOracle](https://etherscan.io/address/0x0FC8001B2c9Ec90352A46093130e284de5889C86), using its price feed [ezETH/ETH](https://etherscan.io/address/0xF4a3e183F59D2599ee3DF213ff78b1B3b1923696)
-* PIVOT and FALLBACK:
-    * Contract: [OneJumpOracle](https://etherscan.io/address/0xD63011ddAc93a6f8348bf7E6Aeb3E30Ad7B46Df8)
-    * CORRELATED_TOKEN: [ezETH](https://etherscan.io/token/0xbf5495Efe5DB9ce00f80364C8B423567e58d2110)
-    * UNDERLYING_TOKEN: [WETH](https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)
-    * INTERMEDIATE_ORACLE: [ChainlinkOracle](https://etherscan.io/address/0x94c3A2d6B7B2c051aDa041282aec5B0752F8A1F2), using its price feed [ezETH/ETH](https://etherscan.io/address/0x636A000262F6aA9e1F094ABF0aD8f645C44f641C)
-* Thresholds in the bound validator: 0.99 - 1.01
-
-#### Security and additional considerations
-
-We applied the following security procedures for this upgrade:
-
-* **Audits:** [Quantstamp](https://github.com/VenusProtocol/oracle/blob/5cd52976a4c4d24e11ab34ca3aa5f99837eef593/audits/100_correlated_token_oracles_quantstamp_20240412.pdf), [Certik](https://github.com/VenusProtocol/oracle/blob/5cd52976a4c4d24e11ab34ca3aa5f99837eef593/audits/098_correlated_token_oracles_certik_20240412.pdf) and [Fairyproof](https://github.com/VenusProtocol/oracle/blob/5cd52976a4c4d24e11ab34ca3aa5f99837eef593/audits/101_correlated_token_oracles_fairyproof_20240328.pdf) have audited the OneJumpOracle.
-* **VIP execution simulation:** in a simulation environment, validating the new market is properly added to the Liquid Staked ETH pool on Ethereum, with the right parameters and the expected bootstrap liquidity
-* **Deployment on testnet:** the same market has been deployed to sepolia, and used in the Venus Protocol testnet deployment
-
-#### Deployed contracts
-
-* Mainnet vezETH_LiquidStakedETH: [0xA854D35664c658280fFf27B6eDC6C4195c3229B3](https://etherscan.io/address/0xA854D35664c658280fFf27B6eDC6C4195c3229B3)
-* Testnet vezETH_LiquidStakedETH: [0xF4C1B7528f8B266D8ADf1a85c91d93114FeDbA2A](https://sepolia.etherscan.io/address/0xF4C1B7528f8B266D8ADf1a85c91d93114FeDbA2A)
-
-#### References
-
-* [VIP simulation](https://github.com/VenusProtocol/vips/pull/328)
-* [Code of OneJumpOracle](https://github.com/VenusProtocol/oracle/blob/develop/contracts/oracles/OneJumpOracle.sol)
-* [Documentation](https://docs-v4.venus.io/risk/resilient-price-oracle#correlated-token-oracles) 
-
-#### Disclaimer for Ethereum VIPs
-
-Privilege commands on Ethereum will be executed by the [Guardian wallet](https://etherscan.io/address/0x285960C5B22fD66A736C7136967A3eB15e93CC67), until the [Multichain Governance](https://docs-v4.venus.io/technical-reference/reference-technical-articles/multichain-governance) contracts are fully enabled. If this VIP passes, [this](https://app.safe.global/transactions/tx?safe=eth:0x285960C5B22fD66A736C7136967A3eB15e93CC67&id=multisig_0x285960C5B22fD66A736C7136967A3eB15e93CC67_0xd2a4cf0ef50774d47f5744e48c1317d5de7c48b7f2340cbaaf0d0b216b1236ac) multisig transaction will be executed. Otherwise, it will be rejected.",
-        "forDescription": "I agree that Venus Protocol should proceed with this proposal",
-        "title": "VIP-345 [Ethereum] New ezETH market in the Liquid Staked ETH pool",
-        "version": "v2",
-      },
-      "endBlock": 40844245,
-      "endDate": 2028-01-31T12:26:17.000Z,
-      "executedDate": 2024-07-29T17:16:54.000Z,
-      "executedTxHash": "0x83bf35a4d86f0c0b4b2cfe535006cf1becc9df3e49abe2fa0181f7af6d906362",
-      "executionEtaDate": 2024-07-29T17:07:55.000Z,
-      "forVotes": [
-        {
-          "address": "0xc444949e0054a23c44fc45789738bdf64aed2391",
-          "proposalId": "345",
-          "reason": "Community delegators approved.",
-          "support": 1,
-          "votesMantissa": "4.07289674445287940237609e+23",
-        },
-        {
-          "address": "0xc72f3295b7fe847ec99e3a3c6dd6e90db5e1061b",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.00001059438691098785833e+23",
-        },
-        {
-          "address": "0x1abe7f510dd4cc2b017ef78f4757b83ae334862d",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1e+23",
-        },
-        {
-          "address": "0xfce889ba7afde7428acaa3ef146b1bd526e78a19",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1e+23",
-        },
-        {
-          "address": "0xf62c2d6ad02bb8b248e3b9be730b036f04d5453e",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.5189102236520590757127e+22",
-        },
-        {
-          "address": "0x09c90ea0d16ce058229b939967aa29446d13ceed",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.166e+21",
-        },
-        {
-          "address": "0x21f62c4c380264231d33dd1a1fe546d013b905f8",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "801851714101606493084",
-        },
-        {
-          "address": "0x299741f68fd5b59ca177795d824f9ce9f6843bba",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "63404721729301508664",
-        },
-        {
-          "address": "0x1c25523a33128dc87ff6f26c444a981b03a97f1e",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "7986304696458341870",
-        },
-        {
-          "address": "0x03397520a5c1c27bba59852795764ebf1fe05978",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "4297102348559360929",
-        },
-        {
-          "address": "0x51e76fd862d563d58b7a807b01eabe0f3b07ac1a",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "3338470954295420970",
-        },
-        {
-          "address": "0x627c97d755fc7fbb54ceb3c8e7d341cf9074c357",
-          "proposalId": "345",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "142051682906883578",
-        },
-      ],
-      "forVotesMantissa": "7.24526856486012757789664e+23",
-      "proposalActions": [],
-      "proposalId": "345",
-      "proposalType": 0,
-      "proposerAddress": "0x55a9f5374af30e3045fb491f1da3c2e8a74d168d",
-      "queuedDate": 2024-07-27T17:07:55.000Z,
-      "queuedTxHash": "0xf44368efd273825fc5426543ee66fe9d889e9e19d2469eca6296d96cedf17285",
-      "startDate": 2028-01-30T12:26:17.000Z,
-      "state": 0,
-      "totalVotesMantissa": "7.24526856486012757789664e+23",
-      "userVoteSupport": undefined,
-    },
-    {
-      "abstainVotes": [],
-      "abstainedVotesMantissa": "0",
-      "againstVotes": [
-        {
-          "address": "0xf5a78c15dd8013b8ed622c3b9b316e8ef5a6f61f",
-          "proposalId": "344",
-          "reason": "Xvs core pool also needs xvs distribution apy ",
-          "support": 0,
-          "votesMantissa": "1.001727281834443881027e+21",
-        },
-      ],
-      "againstVotesMantissa": "1.001727281834443881027e+21",
-      "cancelDate": undefined,
-      "cancelTxHash": undefined,
-      "createdDate": 2024-07-25T16:09:23.000Z,
-      "createdTxHash": "0x2426f9c0a21626b917a7ab68e27fec2262c47758bb6dc5fb0cd5bd3cf0d23ce1",
-      "description": {
-        "abstainDescription": "Indifferent to execution",
-        "againstDescription": "Do not execute this proposal",
-        "description": "#### Summary
-
-If passed, this VIP will transfer the converted XVS tokens from the [XVS Vault Treasury](https://etherscan.io/address/0xaE39C38AF957338b3cEE2b3E5d825ea88df02EfE) to the [XVS Store](https://etherscan.io/address/0x1db646e1ab05571af99e47e8f909801e5c99d37b) and adjust the XVS Vault distribution speed.
-
-- Transfer 6,893 XVS from the [XVS Vault Treasury](https://etherscan.io/address/0xaE39C38AF957338b3cEE2b3E5d825ea88df02EfE) to the [XVS Store](https://etherscan.io/address/0x1db646e1ab05571af99e47e8f909801e5c99d37b) for distribution.
-- Increase the XVS distribution speed from 250 XVS/Day to 310 XVS/day.
-
-#### Description
-
-A total of 6,893 XVS has been converted through a buyback during Q2 2024 using the [XVS converter](https://etherscan.io/address/0x1FD30e761C3296fE36D9067b1e398FD97B4C0407). These tokens will be added to the distribution as per our [Tokenomics V4](https://app.venus.io/#/governance/proposal/332?chainId=56) and [ETH Deployment Proposal](https://community.venus.io/t/xvs-ethereum-mainnet-development-program-with-lido-frax-curve-and-gitcoin/4200).
-
-The converted XVS is currently held in the [XVS Vault Treasury](https://etherscan.io/address/0xaE39C38AF957338b3cEE2b3E5d825ea88df02EfE) and needs to be transferred to the [XVS Store](https://etherscan.io/address/0x1db646e1ab05571af99e47e8f909801e5c99d37b) for distribution.
-
-The new distribution speed will be increased from 250 XVS/day to 310 XVS/day, which is estimated to increase the vault APR from 12% to 15%.
-
-#### References
-
-- [Tokenomics V4](https://app.venus.io/#/governance/proposal/332?chainId=56)
-- [ETH Deployment Proposal](https://community.venus.io/t/xvs-ethereum-mainnet-development-program-with-lido-frax-curve-and-gitcoin/4200)
-- [VIP simulation](https://github.com/VenusProtocol/vips/pull/330)
-
-#### Disclaimer for Ethereum VIPs
-
-Privilege commands on Ethereum will be executed by the [Guardian wallet](https://etherscan.io/address/0x285960C5B22fD66A736C7136967A3eB15e93CC67), until the [Multichain Governance](https://docs-v4.venus.io/technical-reference/reference-technical-articles/multichain-governance) contracts are fully enabled. If this VIP passes, [this](https://app.safe.global/transactions/tx?safe=eth:0x285960C5B22fD66A736C7136967A3eB15e93CC67&id=multisig_0x285960C5B22fD66A736C7136967A3eB15e93CC67_0x26a82f80811aebe17b3dc863726075581db822b08381f9bb75feb1600a4d11e6) multisig transaction will be executed. Otherwise, it will be rejected.",
-        "forDescription": "Execute this proposal",
-        "title": "VIP-344 [Ethereum] Distribution Speed Adjustment for the XVS Vault",
-        "version": "v2",
-      },
-      "endBlock": 40814685,
-      "endDate": 2028-01-30T11:48:17.000Z,
-      "executedDate": 2024-07-28T16:20:53.000Z,
-      "executedTxHash": "0xbfb59828a4b0fef18b88affca4980834dd015ecceff2ef0303bc7fd0e1cf32df",
-      "executionEtaDate": 2024-07-28T16:14:12.000Z,
-      "forVotes": [
-        {
-          "address": "0xc444949e0054a23c44fc45789738bdf64aed2391",
-          "proposalId": "344",
-          "reason": "Community delegators approved.",
-          "support": 1,
-          "votesMantissa": "4.10181267722260581017158e+23",
-        },
-        {
-          "address": "0xc72f3295b7fe847ec99e3a3c6dd6e90db5e1061b",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.00001059438691098785833e+23",
-        },
-        {
-          "address": "0x1abe7f510dd4cc2b017ef78f4757b83ae334862d",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1e+23",
-        },
-        {
-          "address": "0xfce889ba7afde7428acaa3ef146b1bd526e78a19",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1e+23",
-        },
-        {
-          "address": "0xf62c2d6ad02bb8b248e3b9be730b036f04d5453e",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.4333339783793114945839e+22",
-        },
-        {
-          "address": "0x2626600b9a04607b876afd155d7bef6832ac25ef",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "8.163577383031450017859e+21",
-        },
-        {
-          "address": "0x09c90ea0d16ce058229b939967aa29446d13ceed",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.166e+21",
-        },
-        {
-          "address": "0x3189b40140cac6c20d5de8a37d667cc6a866d41b",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.129288737856030085845e+21",
-        },
-        {
-          "address": "0xbdc1faea0cb9121df6afd0e47accd3048ba01337",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1.015965846030073973859e+21",
-        },
-        {
-          "address": "0x21f62c4c380264231d33dd1a1fe546d013b905f8",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "801851714101606493084",
-        },
-        {
-          "address": "0x03397520a5c1c27bba59852795764ebf1fe05978",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "4297102348559360929",
-        },
-        {
-          "address": "0x51e76fd862d563d58b7a807b01eabe0f3b07ac1a",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "3338470954295420970",
-        },
-        {
-          "address": "0x1c79eb2546e9e5c07a6be6cfb9c341a52eb107db",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "2000000000000000000",
-        },
-        {
-          "address": "0xe853cbc6a77cf04dc5bc990131bab00d926b923a",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "1002000000000000000",
-        },
-        {
-          "address": "0x627c97d755fc7fbb54ceb3c8e7d341cf9074c357",
-          "proposalId": "344",
-          "reason": undefined,
-          "support": 1,
-          "votesMantissa": "142051682906883578",
-        },
-      ],
-      "forVotesMantissa": "7.36803130250749716984954e+23",
-      "proposalActions": [],
-      "proposalId": "344",
-      "proposalType": 0,
-      "proposerAddress": "0xc444949e0054a23c44fc45789738bdf64aed2391",
-      "queuedDate": 2024-07-26T16:14:12.000Z,
-      "queuedTxHash": "0xb4f41b3a6bf80c317c1ac63c06841b0331a0f7f74fa2bf4ac8141ef2958882aa",
-      "startDate": 2028-01-29T11:48:17.000Z,
-      "state": 0,
-      "totalVotesMantissa": "7.37804857532584160865981e+23",
-      "userVoteSupport": undefined,
-    },
   ],
-  "total": 353,
+  "total": 356,
 }
 `;
 

@@ -15,11 +15,7 @@ import { callOrThrow } from 'utilities';
 
 type TrimmedGetProposalsInput = Omit<
   GetProposalsInput,
-  | 'currentBlockNumber'
-  | 'proposalMinQuorumVotesMantissa'
-  | 'proposalExecutionGracePeriodMs'
-  | 'blockTimeMs'
-  | 'chainId'
+  'currentBlockNumber' | 'proposalMinQuorumVotesMantissa' | 'blockTimeMs' | 'chainId'
 >;
 
 type Options = QueryObserverOptions<
@@ -31,10 +27,7 @@ type Options = QueryObserverOptions<
     FunctionKey.GET_PROPOSALS,
     Omit<
       GetProposalsInput,
-      | 'currentBlockNumber'
-      | 'proposalMinQuorumVotesMantissa'
-      | 'proposalExecutionGracePeriodMs'
-      | 'blockTimeMs'
+      'currentBlockNumber' | 'proposalMinQuorumVotesMantissa' | 'blockTimeMs'
     >,
   ]
 >;
@@ -52,7 +45,7 @@ export const useGetProposals = (
   });
   const currentBlockNumber = getBlockNumberData?.blockNumber;
 
-  const { blockTimeMs, proposalExecutionGracePeriodMs } = CHAIN_METADATA[governanceChain.id];
+  const { blockTimeMs } = CHAIN_METADATA[governanceChain.id];
 
   const sanitizedInput: TrimmedGetProposalsInput = {
     ...input,
@@ -74,7 +67,6 @@ export const useGetProposals = (
         {
           currentBlockNumber,
           proposalMinQuorumVotesMantissa,
-          proposalExecutionGracePeriodMs,
           blockTimeMs,
         },
         params =>

@@ -1,8 +1,9 @@
 import type BigNumber from 'bignumber.js';
 import {
   type GetBscProposalInput as GetBscGqlProposalInput,
+  enrichRemoteProposals,
   formatToProposal,
-  getBscProposal as getBscGqlProposal,
+  getBscProposal,
 } from 'clients/subgraph';
 import { VError } from 'libs/errors';
 import type { ChainId, Proposal } from 'types';
@@ -13,7 +14,6 @@ export interface GetProposalInput {
   currentBlockNumber: number;
   proposalMinQuorumVotesMantissa: BigNumber;
   blockTimeMs: number;
-  proposalExecutionGracePeriodMs: number;
   accountAddress?: string;
 }
 
@@ -26,7 +26,6 @@ export const getProposal = async ({
   chainId,
   currentBlockNumber,
   proposalMinQuorumVotesMantissa,
-  proposalExecutionGracePeriodMs,
   blockTimeMs,
   accountAddress,
 }: GetProposalInput): Promise<GetProposalOutput> => {
@@ -34,7 +33,7 @@ export const getProposal = async ({
     id: proposalId.toString(),
   };
 
-  const response = await getBscGqlProposal({
+  const response = await getBscProposal({
     chainId,
     variables,
   });
@@ -48,10 +47,15 @@ export const getProposal = async ({
     });
   }
 
+  // Fetch remote proposals
+  const gqlRemoteProposalsMapping = await enrichRemoteProposals({
+    gqlRemoteProposals: gqlProposal.remoteProposals,
+  });
+
   const proposal = formatToProposal({
     gqlProposal,
+    gqlRemoteProposalsMapping,
     proposalMinQuorumVotesMantissa,
-    proposalExecutionGracePeriodMs,
     currentBlockNumber,
     blockTimeMs,
     accountAddress,

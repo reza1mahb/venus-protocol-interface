@@ -233,7 +233,9 @@ export const ProposalSummaryUi: React.FC<ProposalSummaryUiProps & ProposalSummar
               )}
             </div>
 
-            {isVoteProposalFeatureEnabled && updateProposalButton}
+            {isVoteProposalFeatureEnabled &&
+              !isMultichainGovernanceFeatureEnabled &&
+              updateProposalButton}
           </div>
         </div>
 

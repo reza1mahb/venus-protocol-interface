@@ -1,10 +1,12 @@
 import BigNumber from 'bignumber.js';
-import type { ProposalsQuery } from 'clients/subgraph/gql/generated/governanceBsc';
+import type { BscProposalFragment } from 'clients/subgraph/gql/generated/governanceBsc';
+import type { NonBscProposalFragment } from 'clients/subgraph/gql/generated/governanceNonBsc';
 import {
   type AbstainVoter,
   type AgainstVoter,
   type ForVoter,
   type Proposal,
+  type RemoteProposal,
   VoteSupport,
 } from 'types';
 import {
@@ -17,27 +19,34 @@ import {
   getUserVoteSupport,
 } from 'utilities';
 import { formatToProposalActions } from './formatToProposalActions';
+import { formatToRemoteProposal } from './formatToRemoteProposal';
 
 export const formatToProposal = ({
   gqlProposal,
+  gqlRemoteProposalsMapping,
   currentBlockNumber,
   proposalMinQuorumVotesMantissa,
-  proposalExecutionGracePeriodMs,
   accountAddress,
   blockTimeMs,
 }: {
-  gqlProposal: ProposalsQuery['proposals'][number];
+  gqlProposal: BscProposalFragment;
+  gqlRemoteProposalsMapping: {
+    [proposalId: number]: NonBscProposalFragment;
+  };
   currentBlockNumber: number;
   proposalMinQuorumVotesMantissa: BigNumber;
   blockTimeMs: number;
-  proposalExecutionGracePeriodMs?: number;
   accountAddress?: string;
 }) => {
   const executionEtaDate = convertToDate({ timestampSeconds: Number(gqlProposal.executionEta) });
 
   const nowMs = new Date().getTime();
-  const startDate = new Date(nowMs + (gqlProposal.startBlock - currentBlockNumber) * blockTimeMs);
-  const endDate = new Date(nowMs + (gqlProposal.endBlock - currentBlockNumber) * blockTimeMs);
+  const startDate = new Date(
+    nowMs + (Number(gqlProposal.startBlock) - currentBlockNumber) * blockTimeMs,
+  );
+  const endDate = new Date(
+    nowMs + (Number(gqlProposal.endBlock) - currentBlockNumber) * blockTimeMs,
+  );
 
   // Extract BSC proposal actions
   const proposalActions = formatToProposalActions({
@@ -46,6 +55,38 @@ export const formatToProposal = ({
     targets: gqlProposal.targets || [],
     values: gqlProposal.values || [],
   });
+
+  const remoteProposals = gqlProposal.remoteProposals.reduce<RemoteProposal[]>(
+    (
+      acc,
+      { proposalId, trustedRemote, stateTransactions, calldatas, signatures, targets, values },
+    ) => {
+      const gqlRemoteProposal = gqlRemoteProposalsMapping[proposalId];
+
+      if (!gqlRemoteProposal) {
+        return acc;
+      }
+
+      const remoteProposal = formatToRemoteProposal({
+        proposalId: Number(gqlProposal.proposalId),
+        layerZeroChainId: trustedRemote.layerZeroChainId,
+        gqlRemoteProposal,
+        bridgedTimestampSeconds: stateTransactions?.stored?.timestamp
+          ? Number(stateTransactions.stored.timestamp)
+          : undefined,
+        withdrawnTimestampSeconds: stateTransactions?.withdrawn?.timestamp
+          ? Number(stateTransactions.withdrawn.timestamp)
+          : undefined,
+        callDatas: calldatas ?? [],
+        signatures: signatures ?? [],
+        targets: targets ?? [],
+        values: values ?? [],
+      });
+
+      return [...acc, remoteProposal];
+    },
+    [],
+  );
 
   // Extract votes
   const {
@@ -112,35 +153,34 @@ export const formatToProposal = ({
     );
 
   const result: Proposal = {
-    proposalId: gqlProposal.proposalId,
+    proposalId: Number(gqlProposal.proposalId),
     proposalType: getProposalType({ type: gqlProposal.type }),
     proposerAddress: gqlProposal.proposer.id,
     state: getProposalState({
-      startBlockNumber: gqlProposal.startBlock,
-      endBlockNumber: gqlProposal.endBlock,
+      startBlockNumber: Number(gqlProposal.startBlock),
+      endBlockNumber: Number(gqlProposal.endBlock),
       currentBlockNumber,
       proposalMinQuorumVotesMantissa,
-      proposalExecutionGracePeriodMs,
       forVotesMantissa,
       passing: gqlProposal.passing,
       queued: !!gqlProposal.queued?.timestamp,
       executed: !!gqlProposal.executed?.timestamp,
       canceled: !!gqlProposal.canceled?.timestamp,
-      executionEtaTimestampMs: gqlProposal.executionEta,
+      executionEtaTimestampMs: Number(gqlProposal.executionEta * 1000),
     }),
     description: formatToProposalDescription({ description: gqlProposal.description }),
     endBlock: +gqlProposal.endBlock,
     createdDate: gqlProposal.created?.timestamp
-      ? convertToDate({ timestampSeconds: gqlProposal.created.timestamp })
+      ? convertToDate({ timestampSeconds: Number(gqlProposal.created.timestamp) })
       : undefined,
     cancelDate: gqlProposal.canceled?.timestamp
-      ? convertToDate({ timestampSeconds: gqlProposal.canceled.timestamp })
+      ? convertToDate({ timestampSeconds: Number(gqlProposal.canceled.timestamp) })
       : undefined,
     queuedDate: gqlProposal.queued?.timestamp
-      ? convertToDate({ timestampSeconds: gqlProposal.queued.timestamp })
+      ? convertToDate({ timestampSeconds: Number(gqlProposal.queued.timestamp) })
       : undefined,
     executedDate: gqlProposal.executed?.timestamp
-      ? convertToDate({ timestampSeconds: gqlProposal.executed.timestamp })
+      ? convertToDate({ timestampSeconds: Number(gqlProposal.executed.timestamp) })
       : undefined,
     proposalActions,
     forVotes,
@@ -158,6 +198,7 @@ export const formatToProposal = ({
     startDate,
     endDate,
     executionEtaDate,
+    remoteProposals,
   };
 
   return result;

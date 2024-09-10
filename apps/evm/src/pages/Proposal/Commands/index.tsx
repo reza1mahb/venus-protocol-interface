@@ -1,18 +1,21 @@
 import { Card, type CardProps } from 'components';
 import { useTranslation } from 'libs/translations';
-import { type ProposalCommand, ProposalCommandState } from 'types';
+import { type Proposal, RemoteProposalState } from 'types';
 import { Command } from './Command';
 import { Progress } from './Progress';
 
 export interface CommandsProps extends CardProps {
-  commands: ProposalCommand[];
+  proposal: Proposal;
 }
 
-export const Commands: React.FC<CommandsProps> = ({ commands, ...otherProps }) => {
+export const Commands: React.FC<CommandsProps> = ({ proposal, ...otherProps }) => {
   const { t } = useTranslation();
 
-  const successfulPayloadsCount = commands.reduce(
-    (acc, command) => (command.state === ProposalCommandState.Executed ? acc + 1 : acc),
+  const totalPayloadsCount = proposal.remoteProposals.length + 1; // Remote proposals + BSc proposal
+
+  // TODO: include BSC proposal (see VEN-2701)
+  const successfulPayloadsCount = proposal.remoteProposals.reduce(
+    (acc, command) => (command.state === RemoteProposalState.Executed ? acc + 1 : acc),
     0,
   );
 
@@ -23,12 +26,12 @@ export const Commands: React.FC<CommandsProps> = ({ commands, ...otherProps }) =
 
         <Progress
           successfulPayloadsCount={successfulPayloadsCount}
-          totalPayloadsCount={commands.length}
+          totalPayloadsCount={totalPayloadsCount}
         />
       </div>
 
       <div className="space-y-4">
-        {commands.map(command => (
+        {proposal.remoteProposals.map(command => (
           <Command
             {...command}
             className="border-b border-b-lightGrey pb-4 last:pb-0 last:border-b-0"
